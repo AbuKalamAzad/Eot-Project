@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eot.core.EOTConstant;
 import com.eot.domain.dao.SuperAdminDao;
 import com.eot.domain.model.SuperAdmin;
 import com.eot.util.EotException;
@@ -30,7 +31,7 @@ public class SuperAdminServiceImp implements SuperAdminService {
 		if (superAdmin == null) {
 			adminDao.saveOrUpadte(admin);
 		} else {
-			throw new EotException("already exists delete older and try");
+			throw new EotException(EOTConstant.SUPERADMIN_ALREADY_EXISTS);
 		}
 
 	}
@@ -41,7 +42,7 @@ public class SuperAdminServiceImp implements SuperAdminService {
 		if (superAdmin != null) {
 			adminDao.deleteAdmin(userId);
 		} else {
-			throw new EotException("admin  does not exists");
+			throw new EotException(EOTConstant.SUPERADMIN_DOESNOT_EXISTS);
 		}
 
 	}
@@ -63,10 +64,10 @@ public class SuperAdminServiceImp implements SuperAdminService {
 				superAdmin.setActive(true);
 				adminDao.saveOrUpadte(superAdmin);
 			} else {
-				throw new EotException("Invalid login");
+				throw new EotException(EOTConstant.INVALID_USER);
 			}
 		} else {
-			throw new EotException("admin does not exists");
+			throw new EotException(EOTConstant.SUPERADMIN_DOESNOT_EXISTS);
 		}
 
 	}

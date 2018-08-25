@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eot.core.EOTConstant;
 import com.eot.domain.model.SuperAdmin;
 import com.eot.domain.services.SuperAdminService;
 import com.eot.util.EotException;
@@ -40,7 +41,7 @@ public class AdminController {
 
 		try {
 			superAdminService.adminLogin(admin);
-			return ResponseEntity.status(HttpStatus.OK).body(new String("login Successfully"));
+			return ResponseEntity.status(HttpStatus.OK).body(EOTConstant.SUPERADMIN_LOGIN_SUCESS);
 		} catch (EotException e) {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new String(e.getMessage()));
