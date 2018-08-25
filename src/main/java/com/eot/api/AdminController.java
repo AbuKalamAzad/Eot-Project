@@ -44,7 +44,7 @@ public class AdminController {
 			return ResponseEntity.status(HttpStatus.OK).body(EOTConstant.SUPERADMIN_LOGIN_SUCESS);
 		} catch (EotException e) {
 			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new String(e.getMessage()));
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 
 	}
@@ -56,7 +56,7 @@ public class AdminController {
 			
 			superAdminService.deleteAdmin(userId);
 			
-			return ResponseEntity.status(HttpStatus.OK).body(new String("Admin Deleted Successfully"));
+			return ResponseEntity.status(HttpStatus.OK).body(EOTConstant.SUPERADMIN_DELETE_SUCCESSFULLY);
 		}catch(EotException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new String(e.getMessage()));
 		}
