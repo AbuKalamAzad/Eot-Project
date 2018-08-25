@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -17,8 +19,12 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
 @EnableTransactionManagement
+@PropertySource("classpath:hibernate.properties")
 @ComponentScan({"com.eot.config"})
 public class HibernateConfig {
+	
+	@Autowired
+	private Environment env;
 	
 	@Bean
 	public LocalSessionFactoryBean sessionFactoryBean() {
@@ -33,10 +39,10 @@ public class HibernateConfig {
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource ds = new DriverManagerDataSource();
-		ds.setDriverClassName("com.mysql.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://localhost:3306/eot");
-		ds.setUsername("root");
-		ds.setPassword("root");
+		ds.setDriverClassName(env.getProperty("hibernate.connection.driver_class"));
+		ds.setUrl(env.getProperty("hibernate.connection.url"));
+		ds.setUsername(env.getProperty("hibernate.connection.username"));
+		ds.setPassword(env.getProperty("hibernate.connection.password"));
 		return ds;
 		
 	}
