@@ -12,14 +12,13 @@ import com.eot.domain.model.Commission;
 
 @Repository
 public class CommissionDaoImpl implements CommissionDao {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
-	
-	
-    protected Session getSession() {
-    	return sessionFactory.getCurrentSession();
-    }
+
+	protected Session getSession() {
+		return sessionFactory.getCurrentSession();
+	}
 
 	@Override
 	public void saveOrUpadte(Commission commission) {
@@ -27,21 +26,35 @@ public class CommissionDaoImpl implements CommissionDao {
 	}
 
 	@Override
-	public void deleteCommission(String id) {
-		// TODO Auto-generated method stub
-		
+	public void deleteCommission(String userId) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Commission.class);
+		@SuppressWarnings("unchecked")
+		List<Commission> commissions = (List<Commission>) criteria.list();
+		for (Commission comm : commissions) {
+			if (comm.getUserId().equals(userId))
+				sessionFactory.getCurrentSession().delete(comm);
+		}
+
 	}
 
 	@Override
 	public Commission findCommissionByUserId(String userId) {
 		Criteria criteria = getSession().createCriteria(Commission.class);
-		List<Commission> commissions = (List<Commission>)criteria.list();
-		for(Commission comm:commissions)
-		{
-			if(comm.getUserId().equals(userId))
-			return comm;
+		@SuppressWarnings("unchecked")
+		List<Commission> commissions = (List<Commission>) criteria.list();
+		for (Commission comm : commissions) {
+			if (comm.getUserId().equals(userId))
+				return comm;
 		}
 		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Commission> getListCommission() {
+		Criteria criteria = getSession().createCriteria(Commission.class);
+		
+			return (List<Commission>) criteria.list();
 	}
 
 }
