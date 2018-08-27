@@ -1,5 +1,8 @@
 package com.eot.domain.services;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +21,40 @@ public class MgurushServiceImpl  implements MgurushService{
 	
 	@Override
 	public void saveOrUpadte(MGurush mgurush) throws EotException {
-		
+		mgurush.setCreatedDate(new Date());
 		mgurushDao.saveOrUpdate(mgurush);
 	}
 
 	@Override
-	public void deleteAdmin(String userId) throws EotException {
-		// TODO Auto-generated method stub
+	public void deleteMgurush(String userId) throws EotException {
+		
+		MGurush gurush = mgurushDao.findMgurushByUserId(userId);
+		if(gurush != null) {
+		mgurushDao.deleteMgurush(userId);
+		}else {
+			throw new EotException("Mgurush Does not exits");
+		}
+	}
+
+	@Override
+	public void updateMgurush(String userId,MGurush mgurush) throws EotException {
+		
+		MGurush gurush = mgurushDao.findMgurushByUserId(userId);
+		if(gurush!=null) {
+		mgurush.setUpdateDate(new Date());
+		mgurushDao.saveOrUpdate(mgurush);
+		}else {
+			throw new EotException("Mgurush Does not exits");
+		}
 		
 	}
+
+	@Override
+	public List<MGurush> findAll() {
+		
+		return mgurushDao.findAll();
+	}
+
+	
 
 }

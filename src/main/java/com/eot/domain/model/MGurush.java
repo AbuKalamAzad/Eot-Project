@@ -1,9 +1,13 @@
 package com.eot.domain.model;
 
+import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,16 +30,23 @@ public class MGurush {
 	
 	private Long userType;
 	
-	private Long transactionLimit;
-	
-	
+	private Date createdDate;
 
-	public Long getTransactionLimit() {
+	private boolean accountEnabled = false ;
+
+	private Date updateDate;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private TransactionLimit transactionLimit;
+	
+	
+	
+	public TransactionLimit getTransactionLimit() {
 		return transactionLimit;
 	}
 
-	public void setTransactionLimit(Long transactionLimit) {
-		transactionLimit = transactionLimit;
+	public void setTransactionLimit(TransactionLimit transactionLimit) {
+		this.transactionLimit = transactionLimit;
 	}
 
 	public Long getUserType() {
@@ -84,6 +95,30 @@ public class MGurush {
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public boolean isAccountEnabled() {
+		return accountEnabled;
+	}
+
+	public void setAccountEnabled(boolean accountEnabled) {
+		this.accountEnabled = accountEnabled;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 	
 

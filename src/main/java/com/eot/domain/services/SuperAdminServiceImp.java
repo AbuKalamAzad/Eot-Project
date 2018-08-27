@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.eot.core.EOTConstant;
+import com.eot.domain.dao.LoginDao;
 import com.eot.domain.dao.SuperAdminDao;
+import com.eot.domain.model.Login;
 import com.eot.domain.model.SuperAdmin;
 import com.eot.util.EotException;
 
@@ -19,6 +21,9 @@ public class SuperAdminServiceImp implements SuperAdminService {
 
 	@Autowired
 	SuperAdminDao adminDao;
+
+	@Autowired
+	LoginDao loginDao;
 
 	public void setAdminDao(SuperAdminDao adminDao) {
 		this.adminDao = adminDao;
@@ -30,6 +35,11 @@ public class SuperAdminServiceImp implements SuperAdminService {
 		SuperAdmin superAdmin = adminDao.getAdmin();
 
 		if (superAdmin == null) {
+			Login login = new Login();
+			login.setUserId(admin.getUserId());
+			login.setPassword(admin.getPassword());
+			login.setUserType(admin.getUserType());
+			loginDao.saveLogin(login);
 			admin.setCreatedDate(new Date());
 			adminDao.saveOrUpadte(admin);
 		} else {
@@ -64,6 +74,7 @@ public class SuperAdminServiceImp implements SuperAdminService {
 			if ((superAdmin.getPassword().equals(admin.getPassword()))
 					&& (superAdmin.getUserId().equals(admin.getUserId()))) {
 				superAdmin.setActive(true);
+				superAdmin.setAccountEnabled(true);
 				adminDao.saveOrUpadte(superAdmin);
 			} else {
 				throw new EotException(EOTConstant.INVALID_USER);

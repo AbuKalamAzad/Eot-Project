@@ -5,11 +5,11 @@ public enum LoginTypes {
 	SUPERADMIN("SUPERADMIN", 10), MGURUSH("MGURUSH", 20);
 
 	private final String key;
-	private final Integer value;
+	private final Long value;
 
 	LoginTypes(String key, int value) {
 		this.key = key;
-		this.value = value;
+		this.value = (long) value;
 
 	}
 
@@ -17,7 +17,7 @@ public enum LoginTypes {
 		return key;
 	}
 
-	public Integer getValue() {
+	public Long getValue() {
 		return value;
 	}
 
