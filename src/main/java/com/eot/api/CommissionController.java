@@ -43,7 +43,8 @@ public class CommissionController {
 		try {
 			Commission comm = commissionService.findCommissionByUserId(userId);
 			if (comm != null) {
-				commission.setUserId(userId);
+				commission.setId(comm.getId());
+				commission.setUserId(comm.getUserId());
 				commissionService.saveOrUpadte(commission);
 				return ResponseEntity.status(HttpStatus.OK).body(commission);
 			} else {
