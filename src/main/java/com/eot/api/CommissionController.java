@@ -1,5 +1,7 @@
 package com.eot.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ public class CommissionController {
 		try {
 
 			commissionService.saveOrUpadte(commission);
-			return ResponseEntity.status(HttpStatus.OK).body(commission);
+			return ResponseEntity.status(HttpStatus.OK).body(EOTConstant.COMMISSION_ADDED_SUCCESSFULLY);
 
 		} catch (EotException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new String(e.getMessage()));
@@ -46,7 +48,7 @@ public class CommissionController {
 				commission.setId(comm.getId());
 				commission.setUserId(comm.getUserId());
 				commissionService.saveOrUpadte(commission);
-				return ResponseEntity.status(HttpStatus.OK).body(commission);
+				return ResponseEntity.status(HttpStatus.OK).body(EOTConstant.COMMISSION_UPDATED_SUCCESSFULLY);
 			} else {
 				throw new EotException(EOTConstant.COMMISSION_DOESNT_EXIST);
 			}
@@ -55,5 +57,30 @@ public class CommissionController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new String(e.getMessage()));
 		}
 
+	}
+
+	/* Api to delete commission */
+	@RequestMapping(value = "/api/delete/{userId}", method = RequestMethod.DELETE)
+	public ResponseEntity<Object> deleteMgurush(@PathVariable("userId") String userId) {
+
+		try {
+			Commission commission = commissionService.findCommissionByUserId(userId);
+			if (commission != null) {
+				commissionService.deleteCommission(userId);
+				return ResponseEntity.status(HttpStatus.OK).body(EOTConstant.COMMISSION_DELETED_SUCCESSFULLY);
+
+			} else {
+				throw new EotException(EOTConstant.COMMISSION_DOESNT_EXIST);
+			}
+		} catch (EotException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new String(e.getMessage()));
+		}
+	}
+
+	/* Api to get all commissions */
+	@RequestMapping(value = "api/commissions", method = RequestMethod.GET)
+	public @ResponseBody List<Commission> getListCommission() {
+		List<Commission> commissions = commissionService.getListCommission();
+		return commissions;
 	}
 }
