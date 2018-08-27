@@ -47,7 +47,7 @@ public class CommissionController {
 				commissionService.saveOrUpadte(commission);
 				return ResponseEntity.status(HttpStatus.OK).body(commission);
 			} else {
-				throw new EotException(EOTConstant.COMMISSION_DOESNT_EXIST);
+				throw new EotException("comission ");
 			}
 		} catch (EotException e) {
 			e.printStackTrace();

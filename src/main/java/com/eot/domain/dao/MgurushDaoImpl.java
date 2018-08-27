@@ -25,6 +25,11 @@ public class MgurushDaoImpl implements MgurushDao {
 	}
 
 	@Override
+	public void update(MGurush mGurush) {
+		sessionFactory.getCurrentSession().merge(mGurush);
+		
+	}
+	@Override
 	public void deleteMgurush(String userId) {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(MGurush.class);
 		List<MGurush> gurushList = (List<MGurush>)criteria.list();

@@ -8,4 +8,6 @@ public void saveLogin(Login login);
 
 public Login findLoginByUserId(String userId);
 
+public void deleteLogin(String userId);
+
 }

@@ -34,4 +34,16 @@ public class LoginDaoImpl implements LoginDao {
 		return null;
 	}
 
+	@Override
+	public void deleteLogin(String userId) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Login.class);
+		List<Login> loginList = (List<Login>) criteria.list();
+		for (Login login : loginList) {
+			if (login.getUserId().equals(userId))
+				sessionFactory.getCurrentSession().delete(login);
+		}
+		
+		
+	}
+
 }

@@ -15,6 +15,8 @@ public interface MgurushDao {
 	public MGurush findMgurushByUserId(String userId);
 	
 	public List<MGurush> findAll();
+
+	void update(MGurush mGurush);
 	
 	
 

@@ -11,6 +11,7 @@ import com.eot.domain.dao.LoginDao;
 import com.eot.domain.dao.MgurushDao;
 import com.eot.domain.dao.SuperAdminDao;
 import com.eot.domain.model.Login;
+import com.eot.domain.model.MGurush;
 import com.eot.domain.model.SuperAdmin;
 import com.eot.util.EotException;
 
@@ -31,8 +32,8 @@ public class LoginServiceImp implements LoginService {
 	public void loginUser(Login loginUser) throws EotException {
 
 		Login login = loginDao.findLoginByUserId(loginUser.getUserId());
-		
-		if (loginUser != null) {
+
+		if (login != null) {
 			if (login.getUserType() == LoginTypes.SUPERADMIN.getValue()) {
 				if (login.getUserId().equals(loginUser.getUserId())
 						&& login.getPassword().equals(loginUser.getPassword())) {
@@ -41,11 +42,24 @@ public class LoginServiceImp implements LoginService {
 					superadmin.setAccountEnabled(true);
 					adminDao.saveOrUpadte(superadmin);
 
-				}else {
+				} else {
 					throw new EotException("invalid User");
 				}
 			}
-		}else {
+			
+			else if (login.getUserType() == LoginTypes.MGURUSH.getValue()) {
+				if (login.getUserId().equals(loginUser.getUserId())
+						&& login.getPassword().equals(loginUser.getPassword())) {
+					MGurush gurush = mgurushDao.findMgurushByUserId(login.getUserId());
+					gurush.setActive(true);
+					gurush.setAccountEnabled(true);
+					mgurushDao.saveOrUpdate(gurush);
+				} else {
+					throw new EotException("invalid User");
+				}
+
+			}
+		} else {
 			throw new EotException("Login User Doen not Exits");
 		}
 	}

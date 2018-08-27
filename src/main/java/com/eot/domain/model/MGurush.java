@@ -16,7 +16,7 @@ public class MGurush {
 	
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Long id;
 	
 	private String userName;
 	
@@ -40,7 +40,6 @@ public class MGurush {
 	private TransactionLimit transactionLimit;
 	
 	
-	
 	public TransactionLimit getTransactionLimit() {
 		return transactionLimit;
 	}
@@ -57,11 +56,11 @@ public class MGurush {
 		this.userType = userType;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

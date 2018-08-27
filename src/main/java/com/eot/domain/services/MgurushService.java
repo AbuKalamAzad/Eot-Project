@@ -12,9 +12,11 @@ public interface MgurushService {
 
 	public void deleteMgurush(String userId) throws EotException ;
 	
-	public void updateMgurush(String userId,MGurush mgurush)throws EotException;
+	public void updateMgurush(MGurush mgurush)throws EotException;
 	
 	public List<MGurush> findAll();
+
+	MGurush findMgurushByUserId(String userId)throws EotException;
 	
 	
 	
