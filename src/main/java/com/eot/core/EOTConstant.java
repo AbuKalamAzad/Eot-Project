@@ -11,5 +11,7 @@ public interface EOTConstant {
 	public String SUPERADMIN_DELETE_SUCCESSFULLY = "super admin deleted sucessfully";
 	
 	public String SUPERADMIN_ALREADY_EXISTS = "super admin already exits";
+	
+	public Integer LOGINMAXATTEMPTS = new Integer(3);
 
 }

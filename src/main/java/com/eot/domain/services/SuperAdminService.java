@@ -7,9 +7,9 @@ public interface SuperAdminService {
 
 	public void saveOrUpadte(SuperAdmin admin) throws EotException;
 
-	public void deleteAdmin(Long userName) throws EotException ;
+	public void deleteAdmin(String userName) throws EotException ;
 
-	public SuperAdmin findAdminByName(Long userName) throws EotException;
+	public SuperAdmin findAdminByUserId(String userId) throws EotException;
 	
 	public void adminLogin(SuperAdmin admin) throws EotException;
 	

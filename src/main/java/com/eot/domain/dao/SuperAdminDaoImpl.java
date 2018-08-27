@@ -28,7 +28,7 @@ public class SuperAdminDaoImpl implements SuperAdminDao {
 	}
 
 	@Override
-	public void deleteAdmin(Long userId) {
+	public void deleteAdmin(String userId) {
 		Criteria criteria = getSession().createCriteria(SuperAdmin.class);
 		List<SuperAdmin> admins = (List<SuperAdmin>)criteria.list();
 		for(SuperAdmin admin:admins)
@@ -41,7 +41,7 @@ public class SuperAdminDaoImpl implements SuperAdminDao {
 	}
 
 	@Override
-	public SuperAdmin findAdminByUserId(Long userId) {
+	public SuperAdmin findAdminByUserId(String userId) {
 		Criteria criteria = getSession().createCriteria(SuperAdmin.class);
 		List<SuperAdmin> admins = (List<SuperAdmin>)criteria.list();
 		for(SuperAdmin admin:admins)

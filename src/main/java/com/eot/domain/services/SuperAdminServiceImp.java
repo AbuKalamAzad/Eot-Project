@@ -1,5 +1,6 @@
 package com.eot.domain.services;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -29,6 +30,7 @@ public class SuperAdminServiceImp implements SuperAdminService {
 		SuperAdmin superAdmin = adminDao.getAdmin();
 
 		if (superAdmin == null) {
+			admin.setCreatedDate(new Date());
 			adminDao.saveOrUpadte(admin);
 		} else {
 			throw new EotException(EOTConstant.SUPERADMIN_ALREADY_EXISTS);
@@ -37,7 +39,7 @@ public class SuperAdminServiceImp implements SuperAdminService {
 	}
 
 	@Override
-	public void deleteAdmin(Long userId) throws EotException {
+	public void deleteAdmin(String userId) throws EotException {
 		SuperAdmin superAdmin = adminDao.findAdminByUserId(userId);
 		if (superAdmin != null) {
 			adminDao.deleteAdmin(userId);
@@ -48,9 +50,9 @@ public class SuperAdminServiceImp implements SuperAdminService {
 	}
 
 	@Override
-	public SuperAdmin findAdminByName(Long userName) {
-		// TODO Auto-generated method stub
-		return null;
+	public SuperAdmin findAdminByUserId(String userId) {
+		SuperAdmin superAdmin = adminDao.findAdminByUserId(userId);
+		return superAdmin;
 	}
 
 	@Override
@@ -64,6 +66,7 @@ public class SuperAdminServiceImp implements SuperAdminService {
 				superAdmin.setActive(true);
 				adminDao.saveOrUpadte(superAdmin);
 			} else {
+				
 				throw new EotException(EOTConstant.INVALID_USER);
 			}
 		} else {

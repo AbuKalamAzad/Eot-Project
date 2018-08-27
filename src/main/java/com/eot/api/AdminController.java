@@ -50,7 +50,7 @@ public class AdminController {
 	}
 	/*Api to delete superadmin*/
 	@RequestMapping(value = "/api/admin/delete/{userId}", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> deleteAdmin(@PathVariable("userId") Long userId){
+	public ResponseEntity<Object> deleteAdmin(@PathVariable("userId") String userId){
 		
 		try {
 			

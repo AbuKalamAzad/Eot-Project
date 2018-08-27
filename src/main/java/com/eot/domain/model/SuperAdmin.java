@@ -1,5 +1,7 @@
 package com.eot.domain.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,17 +25,32 @@ public class SuperAdmin {
 
 	private String password;
 	
-	private boolean isActive;
+	private boolean isActive = false;
 	
 	
 	@Column(unique = true)
-	private Long userId;
+	private String userId;
 
-	public Long getUserId() {
+	private Long userType;
+	
+    private Date createdDate;
+
+    
+    private boolean accountEnabled = false ;
+
+    
+    private boolean credentialExpired = false;
+
+    private Integer loginAttempts = 3;
+
+   
+    private Date updateDate;
+
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -67,6 +84,54 @@ public class SuperAdmin {
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public Long getUserType() {
+		return userType;
+	}
+
+	public void setUserType(Long userType) {
+		this.userType = userType;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public boolean isAccountEnabled() {
+		return accountEnabled;
+	}
+
+	public void setAccountEnabled(boolean accountEnabled) {
+		this.accountEnabled = accountEnabled;
+	}
+
+	public boolean isCredentialExpired() {
+		return credentialExpired;
+	}
+
+	public void setCredentialExpired(boolean credentialExpired) {
+		this.credentialExpired = credentialExpired;
+	}
+
+	public Integer getLoginAttempts() {
+		return loginAttempts;
+	}
+
+	public void setLoginAttempts(Integer loginAttempts) {
+		this.loginAttempts = loginAttempts;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 	
 

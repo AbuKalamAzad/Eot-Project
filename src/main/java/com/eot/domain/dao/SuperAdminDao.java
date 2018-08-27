@@ -8,11 +8,11 @@ public interface SuperAdminDao {
 	
 	public void saveOrUpadte(SuperAdmin admin);
 	
-	public void deleteAdmin(Long userId);
+	public void deleteAdmin(String userId);
 	
 	
 	public SuperAdmin getAdmin();
 
-	SuperAdmin findAdminByUserId(Long userName);
+	public SuperAdmin findAdminByUserId(String string);
 
 }
