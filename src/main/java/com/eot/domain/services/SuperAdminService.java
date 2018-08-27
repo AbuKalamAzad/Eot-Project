@@ -12,6 +12,8 @@ public interface SuperAdminService {
 	public SuperAdmin findAdminByUserId(String userId) throws EotException;
 	
 	public void adminLogin(SuperAdmin admin) throws EotException;
+
+	
 	
 
 }

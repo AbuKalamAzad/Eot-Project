@@ -66,7 +66,6 @@ public class SuperAdminServiceImp implements SuperAdminService {
 				superAdmin.setActive(true);
 				adminDao.saveOrUpadte(superAdmin);
 			} else {
-				
 				throw new EotException(EOTConstant.INVALID_USER);
 			}
 		} else {
