@@ -70,7 +70,7 @@ public class CommissionController {
 				return ResponseEntity.status(HttpStatus.OK).body(EOTConstant.COMMISSION_DELETED_SUCCESSFULLY);
 
 			} else {
-				throw new EotException(EOTConstant.COMMISSION_DOESNT_EXIST);
+				throw new EotException();
 			}
 		} catch (EotException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new String(e.getMessage()));
